@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FlightManagement-API.Domain\FlightManagement-API.Domain.csproj" />
+    <ProjectReference Include="..\FlightManagement-API.Infrastucture\FlightManagement-API.Infrastructure.csproj" />
+    <ProjectReference Include="..\FlightManagement-API.Persistence\FlightManagement-API.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

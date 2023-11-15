@@ -1,6 +1,8 @@
 
+using FlightManagement_API.Persistence;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightManagement_API
 {
@@ -11,6 +13,11 @@ namespace FlightManagement_API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<FlightDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+
 
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
