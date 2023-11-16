@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightManagement-API.Application\FlightManagement-API.Application.csproj" />
+    <ProjectReference Include="..\FlightManagement-API.Persistence\FlightManagement-API.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

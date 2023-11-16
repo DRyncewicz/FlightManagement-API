@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using FlightManagement_API.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using FlightManagement_API.Domain.Common;
 using FlightManagement_API.Domain.Entities;
 
 namespace FlightManagement_API.Persistence
 {
-    public class FlightDbContext : DbContext
+    public class FlightDbContext: DbContext
     {
+        private readonly IDateTime _dateTime;
         public DbSet<Aircraft> Aircrafts { get; set; }
 
         public DbSet<Airline> Airlines { get; set; }
@@ -26,10 +29,18 @@ namespace FlightManagement_API.Persistence
 
         public FlightDbContext(DbContextOptions<FlightDbContext> options) : base(options)
         {
+
+        }
+
+        public FlightDbContext(DbContextOptions<FlightDbContext> options, IDateTime dateTime) : base(options)
+        {
+            _dateTime = dateTime;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.SeedData();
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<FlightDetail>()
                 .HasKey(fd => fd.Id);
 
@@ -51,31 +62,6 @@ namespace FlightManagement_API.Persistence
                 .HasForeignKey(f => f.ArrivalAirportId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Airport>(entity =>
-            {
-                entity.OwnsOne(a => a.Address, address =>
-                {
-                    address.WithOwner();
-                    address.Property(a => a.Street).HasColumnName("Street");
-                    address.Property(a => a.City).HasColumnName("City");
-                    address.Property(a => a.State).HasColumnName("State");
-                    address.Property(a => a.Country).HasColumnName("Country");
-                    address.Property(a => a.ZipCode).HasColumnName("ZipCode");
-                });
-            });
-
-            modelBuilder.Entity<Passenger>(entity =>
-            {
-                entity.OwnsOne(p => p.Address, address =>
-                {
-                    address.WithOwner();
-                    address.Property(a => a.Street).HasColumnName("Street");
-                    address.Property(a => a.City).HasColumnName("City");
-                    address.Property(a => a.State).HasColumnName("State");
-                    address.Property(a => a.Country).HasColumnName("Country");
-                    address.Property(a => a.ZipCode).HasColumnName("ZipCode");
-                });
-            });
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -86,17 +72,17 @@ namespace FlightManagement_API.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = string.Empty;
-                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.Created = _dateTime.Now;
                         entry.Entity.StatusId = 1;
                         break;
                     case EntityState.Modified:
                         entry.Entity.ModifiedBy = string.Empty;
-                        entry.Entity.Modified = DateTime.Now;
+                        entry.Entity.Modified = _dateTime.Now;
                         break;
                     case EntityState.Deleted:
                         entry.Entity.ModifiedBy = string.Empty;
-                        entry.Entity.Modified = DateTime.Now;
-                        entry.Entity.Inactivated = DateTime.Now;
+                        entry.Entity.Modified = _dateTime.Now;
+                        entry.Entity.Inactivated = _dateTime.Now;
                         entry.Entity.InactivatedBy = string.Empty;
                         entry.Entity.StatusId = 0;
                         entry.State = EntityState.Modified;

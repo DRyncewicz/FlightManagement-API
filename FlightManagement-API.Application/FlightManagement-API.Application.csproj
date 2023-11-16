@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightManagement-API.Domain\FlightManagement-API.Domain.csproj" />
-    <ProjectReference Include="..\FlightManagement-API.Infrastucture\FlightManagement-API.Infrastructure.csproj" />
-    <ProjectReference Include="..\FlightManagement-API.Persistence\FlightManagement-API.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Behaviours\" />
+    <Folder Include="Common\Exceptions\" />
   </ItemGroup>
 
 </Project>

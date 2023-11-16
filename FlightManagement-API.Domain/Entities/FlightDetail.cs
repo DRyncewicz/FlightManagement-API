@@ -27,6 +27,6 @@ namespace FlightManagement_API.Domain.Entities
 
         public DateTime GateTime { get; set; }
 
-        public double FLightDistance { get; set; }
+        public double FlightDistance { get; set; }
     }
 }
