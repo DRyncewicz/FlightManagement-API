@@ -6,7 +6,7 @@ using FlightManagement_API.Domain.Entities;
 
 namespace FlightManagement_API.Persistence
 {
-    public class FlightDbContext: DbContext
+    public class FlightDbContext: DbContext, IFlightDbContext
     {
         private readonly IDateTime _dateTime;
         public DbSet<Aircraft> Aircrafts { get; set; }
@@ -61,7 +61,6 @@ namespace FlightManagement_API.Persistence
                 .WithOne(f => f.ArrivalAirport)
                 .HasForeignKey(f => f.ArrivalAirportId)
                 .OnDelete(DeleteBehavior.Restrict);
-
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

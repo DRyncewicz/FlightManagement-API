@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FlightManagement_API.Application.Common.Interfaces;
 
 namespace FlightManagement_API.Persistence
 {
@@ -12,6 +8,7 @@ namespace FlightManagement_API.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
 
+            services.AddScoped<IFlightDbContext, FlightDbContext>();
             return services;
         }
     }

@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlightManagement_API.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 namespace FlightManagement_API.Persistence

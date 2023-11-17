@@ -13,7 +13,7 @@ namespace FlightManagement_API.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IFileStore, FileStore.FileStore>();

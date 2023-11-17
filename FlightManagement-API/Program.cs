@@ -1,4 +1,6 @@
 
+using FlightManagement_API.Application;
+using FlightManagement_API.Infrastructure;
 using FlightManagement_API.Persistence;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -17,8 +19,10 @@ namespace FlightManagement_API
             builder.Services.AddDbContext<FlightDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-
-
+            var configuration = builder.Configuration;
+            builder.Services.AddApplication();
+            builder.Services.AddPersistence();
+            builder.Services.AddInfrastructure(configuration);
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             options.AddPolicy(name: "MyAllowSpecificOrigins",

@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>FlightManagement_API</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\FlightManagement-API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,11 +19,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FlightManagement-API.Application\FlightManagement-API.Application.csproj" />
+    <ProjectReference Include="..\FlightManagement-API.Infrastucture\FlightManagement-API.Infrastructure.csproj" />
     <ProjectReference Include="..\FlightManagement-API.Persistence\FlightManagement-API.Persistence.csproj" />
   </ItemGroup>
 

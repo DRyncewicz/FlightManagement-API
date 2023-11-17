@@ -293,7 +293,7 @@ namespace FlightManagement_API.Persistence.Migrations
                     b.Property<int>("AircraftId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AirlineId")
+                    b.Property<int>("AirlineName")
                         .HasColumnType("int");
 
                     b.Property<int>("ArrivalAirportId")
@@ -344,7 +344,7 @@ namespace FlightManagement_API.Persistence.Migrations
 
                     b.HasIndex("AircraftId");
 
-                    b.HasIndex("AirlineId");
+                    b.HasIndex("AirlineName");
 
                     b.HasIndex("ArrivalAirportId");
 
@@ -619,7 +619,7 @@ namespace FlightManagement_API.Persistence.Migrations
 
                     b.HasOne("FlightManagement_API.Domain.Entities.Airline", "Airline")
                         .WithMany()
-                        .HasForeignKey("AirlineId")
+                        .HasForeignKey("AirlineName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -313,7 +313,7 @@ namespace FlightManagement_API.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Flights_AirlineId",
                 table: "Flights",
-                column: "AirlineId");
+                column: "AirlineName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Flights_ArrivalAirportId",
