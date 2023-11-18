@@ -1,6 +1,10 @@
 
+using FlightManagement_API.Application;
+using FlightManagement_API.Infrastructure;
+using FlightManagement_API.Persistence;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightManagement_API
 {
@@ -11,7 +15,14 @@ namespace FlightManagement_API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<FlightDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
+            var configuration = builder.Configuration;
+            builder.Services.AddApplication();
+            builder.Services.AddPersistence();
+            builder.Services.AddInfrastructure(configuration);
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             options.AddPolicy(name: "MyAllowSpecificOrigins",
@@ -28,13 +39,19 @@ namespace FlightManagement_API
                     Title = "FlightManagement-API",
                     Version = "v1",
                     Description = "Will be updated",
+                    TermsOfService = new Uri("https://app.termly.io/dashboard/website/ba2d741a-73ad-42a8-810b-17a994a5c7ab/terms-of-service"),
                     License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
-                        Name = "Used license",
-                        Url = new Uri("https://example.com/license")
+                        Name = "MIT Micense",
+                        Url = new Uri("https://choosealicense.com/licenses/mit/")
+                    },
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Name = "Dominik",
+                        Email = "dominik.ryncewicz@gmail.com",
+                        Url = new Uri("https://github.com/DRyncewicz")
                     }
-                }
-            );
+                });
                 var filePath = Path.Combine(AppContext.BaseDirectory, "FlightManagement-API.xml");
                 c.IncludeXmlComments(filePath);
             });
