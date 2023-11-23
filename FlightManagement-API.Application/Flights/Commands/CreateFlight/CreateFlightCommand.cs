@@ -23,7 +23,7 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
 
         public int AircraftId { get; set; }
 
-        public string status { get; set; }
+        public string Status { get; set; }
 
         public string Gate { get; set; }
 

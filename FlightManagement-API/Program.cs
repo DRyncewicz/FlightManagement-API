@@ -5,6 +5,7 @@ using FlightManagement_API.Persistence;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FlightManagement_API
 {
@@ -19,10 +20,25 @@ namespace FlightManagement_API
             builder.Services.AddDbContext<FlightDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            var configuration = builder.Configuration;
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            try
+            {
+                builder.Host.UseSerilog();
+                Log.Information("Application is starting up");
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex,"Could not start up application");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
             builder.Services.AddApplication();
             builder.Services.AddPersistence();
-            builder.Services.AddInfrastructure(configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             options.AddPolicy(name: "MyAllowSpecificOrigins",
@@ -66,7 +82,7 @@ namespace FlightManagement_API
             }).AddInMemoryStorage();
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -74,12 +90,17 @@ namespace FlightManagement_API
                 app.UseSwaggerUI();
             }
             app.MapHealthChecksUI();
+
             app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
