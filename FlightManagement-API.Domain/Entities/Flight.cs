@@ -31,7 +31,7 @@ namespace FlightManagement_API.Domain.Entities
 
         public Aircraft Aircraft { get; set; }
 
-        public string status { get; set; }
+        public string Status { get; set; }
 
         public FlightDetail FlightDetail{ get; set; }
 

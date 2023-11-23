@@ -14,7 +14,7 @@ namespace FlightManagement_API.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Flight> builder)
         {
             builder.Property(p => p.FlightNumber).IsRequired();
-            builder.Property(p => p.status).IsRequired();
+            builder.Property(p => p.Status).IsRequired();
         }
     }
 }
