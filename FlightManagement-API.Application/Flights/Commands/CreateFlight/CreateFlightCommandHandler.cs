@@ -22,23 +22,37 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
                 ArrivalTime = request.ArrivalTime,
                 AirlineId = request.AirlineId,
                 AircraftId = request.AircraftId,
-                Status = request.Status
+                Status = request.Status,
+                FlightDetail = new FlightDetail()
+                {
+                    Gate = request.Gate,
+                    Terminal = request.Terminal,
+                    Stand = request.Stand,
+                    BaggageCarousel = request.BaggageCarousel,
+                    CheckInCounter = request.CheckInCounter,
+                    BoardingStatus = request.BoardingStatus,
+                    Aerobridge = request.Aerobridge,
+                    GateTime = request.GateTime,
+                    FlightDistance = request.FlightDistance
+                }
             };
-            flightDbContext.Flights.Add(flight);
 
-            FlightDetail flightDetail = new()
-            {
-                Gate = request.Gate,
-                Terminal = request.Terminal,
-                Stand = request.Stand,
-                BaggageCarousel = request.BaggageCarousel,
-                CheckInCounter = request.CheckInCounter,
-                BoardingStatus = request.BoardingStatus,
-                Aerobridge = request.Aerobridge,
-                GateTime = request.GateTime,
-                FlightDistance = request.FlightDistance
-            };
-            flightDbContext.FlightDetails.Add(flightDetail);
+
+            //FlightDetail flightDetail = new()
+            //{
+            //    Id = flight.Id,
+            //    Gate = request.Gate,
+            //    Terminal = request.Terminal,
+            //    Stand = request.Stand,
+            //    BaggageCarousel = request.BaggageCarousel,
+            //    CheckInCounter = request.CheckInCounter,
+            //    BoardingStatus = request.BoardingStatus,
+            //    Aerobridge = request.Aerobridge,
+            //    GateTime = request.GateTime,
+            //    FlightDistance = request.FlightDistance
+            //};
+            flightDbContext.Flights.Add(flight);
+            //flightDbContext.FlightDetails.Add(flightDetail);
 
             await flightDbContext.SaveChangesAsync(cancellationToken);
             return flight.Id;

@@ -21,10 +21,13 @@ namespace FlightManagement_API
                 options.UseSqlServer(connectionString));
 
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            builder.Host.UseSerilog((hostContext, services, configuration) =>
+            {
+                configuration.ReadFrom.Configuration(hostContext.Configuration);
+            });
+
             try
             {
-                builder.Host.UseSerilog();
                 Log.Information("Application is starting up");
             }
             catch (Exception ex)
