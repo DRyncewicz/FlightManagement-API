@@ -9,6 +9,7 @@ namespace FlightManagement_API.Persistence
     public class FlightDbContext: DbContext, IFlightDbContext
     {
         private readonly IDateTime _dateTime;
+
         public DbSet<Aircraft> Aircrafts { get; set; }
 
         public DbSet<Airline> Airlines { get; set; }
@@ -39,7 +40,6 @@ namespace FlightManagement_API.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.SeedData();
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<FlightDetail>()
                 .HasKey(fd => fd.Id);
@@ -61,6 +61,8 @@ namespace FlightManagement_API.Persistence
                 .WithOne(f => f.ArrivalAirport)
                 .HasForeignKey(f => f.ArrivalAirportId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.SeedData();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

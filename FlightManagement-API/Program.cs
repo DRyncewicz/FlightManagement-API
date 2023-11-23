@@ -37,7 +37,7 @@ namespace FlightManagement_API
             }
 
             builder.Services.AddApplication();
-            builder.Services.AddPersistence();
+            builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>

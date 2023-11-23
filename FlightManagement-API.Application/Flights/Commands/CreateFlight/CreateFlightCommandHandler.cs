@@ -22,7 +22,7 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
                 ArrivalTime = request.ArrivalTime,
                 AirlineId = request.AirlineId,
                 AircraftId = request.AircraftId,
-                status = request.Status
+                Status = request.Status
             };
             flightDbContext.Flights.Add(flight);
 
