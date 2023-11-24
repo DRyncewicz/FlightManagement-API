@@ -12,7 +12,9 @@ namespace FlightManagement_API.Application.Common.Interfaces
     {
         DbSet<Aircraft> Aircrafts { get; set; }
 
-        DbSet<Airline> Airlines { get; set; }
+        DbSet<Domain.Entities.Airline> Airlines { get; set; }
+
+        DbSet<AirlineContact> AirlineContacts { get; set; } 
 
         DbSet<Airport> Airports { get; set; }
 

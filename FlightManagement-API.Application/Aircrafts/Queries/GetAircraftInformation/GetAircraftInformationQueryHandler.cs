@@ -17,6 +17,7 @@ namespace FlightManagement_API.Application.Aircrafts.Queries.GetAircraftInformat
         {
             var aircraft = await flightDbContext.Aircrafts
                 .Where(a => a.Id == request.AircraftId)
+                .Include(a => a.Airline)
                 .Include(a => a.Amenities)
                 .Include(a => a.Flights)
                 .ThenInclude(f => f.ArrivalAirport)

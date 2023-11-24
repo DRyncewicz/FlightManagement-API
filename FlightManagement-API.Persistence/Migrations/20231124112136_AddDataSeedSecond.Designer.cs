@@ -4,6 +4,7 @@ using FlightManagement_API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightManagement_API.Persistence.Migrations
 {
     [DbContext(typeof(FlightDbContext))]
-    partial class FlightDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124112136_AddDataSeedSecond")]
+    partial class AddDataSeedSecond
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,7 +96,7 @@ namespace FlightManagement_API.Persistence.Migrations
                             Id = 11,
                             AirlineId = 11,
                             BusinessClassSeats = 100,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(460),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9048),
                             CreatedBy = "admin",
                             EconomyClassSeats = 200,
                             InactivatedBy = "",
@@ -111,7 +114,7 @@ namespace FlightManagement_API.Persistence.Migrations
                             Id = 12,
                             AirlineId = 11,
                             BusinessClassSeats = 160,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(469),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9057),
                             CreatedBy = "admin",
                             EconomyClassSeats = 340,
                             InactivatedBy = "",
@@ -133,14 +136,6 @@ namespace FlightManagement_API.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CeoFirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CeoLastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -169,10 +164,6 @@ namespace FlightManagement_API.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SiteUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
@@ -184,93 +175,25 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            CeoFirstName = "Janusz",
-                            CeoLastName = "Knot",
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 754, DateTimeKind.Local).AddTicks(9680),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(8263),
                             CreatedBy = "admin",
                             InactivatedBy = "",
                             LogoUrl = "url_to_logo_american",
                             ModifiedBy = "",
                             Name = "American Airlines",
-                            SiteUrl = "https://www.aa.com",
                             StatusId = 1
                         },
                         new
                         {
                             Id = 12,
-                            CeoFirstName = "Helmuth",
-                            CeoLastName = "Riddle",
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 754, DateTimeKind.Local).AddTicks(9729),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(8461),
                             CreatedBy = "admin",
                             InactivatedBy = "",
                             LogoUrl = "url_to_logo_lufthansa",
                             ModifiedBy = "",
                             Name = "Lufthansa",
-                            SiteUrl = "https://www.lufthansa.com",
                             StatusId = 1
                         });
-                });
-
-            modelBuilder.Entity("FlightManagement_API.Domain.Entities.AirlineContact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AirlineId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(254)
-                        .HasColumnType("nvarchar(254)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Inactivated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InactivatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AirlineId");
-
-                    b.ToTable("AirlineContacts");
                 });
 
             modelBuilder.Entity("FlightManagement_API.Domain.Entities.Airport", b =>
@@ -323,7 +246,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(84),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(8826),
                             CreatedBy = "admin",
                             IataCode = "LAX",
                             InactivatedBy = "",
@@ -334,7 +257,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 12,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(91),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(8830),
                             CreatedBy = "admin",
                             IataCode = "FRA",
                             InactivatedBy = "",
@@ -392,7 +315,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         {
                             Id = 11,
                             AircraftId = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(794),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9463),
                             CreatedBy = "admin",
                             InactivatedBy = "",
                             ModifiedBy = "",
@@ -403,7 +326,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         {
                             Id = 12,
                             AircraftId = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(798),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9466),
                             CreatedBy = "admin",
                             InactivatedBy = "",
                             ModifiedBy = "",
@@ -470,28 +393,28 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(760),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9432),
                             CreatedBy = "admin",
                             FlightId = 11,
                             InactivatedBy = "",
                             ModifiedBy = "",
                             PassengerId = 11,
                             Price = 500.0,
-                            ReservationDate = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(755),
+                            ReservationDate = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9427),
                             Status = "Confirmed",
                             StatusId = 1
                         },
                         new
                         {
                             Id = 12,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(765),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9438),
                             CreatedBy = "admin",
                             FlightId = 12,
                             InactivatedBy = "",
                             ModifiedBy = "",
                             PassengerId = 12,
                             Price = 750.0,
-                            ReservationDate = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(764),
+                            ReservationDate = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9436),
                             Status = "Confirmed",
                             StatusId = 1
                         });
@@ -572,11 +495,11 @@ namespace FlightManagement_API.Persistence.Migrations
                             AircraftId = 11,
                             AirlineId = 11,
                             ArrivalAirportId = 12,
-                            ArrivalTime = new DateTime(2023, 11, 24, 23, 53, 27, 755, DateTimeKind.Local).AddTicks(508),
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(512),
+                            ArrivalTime = new DateTime(2023, 11, 24, 23, 21, 35, 708, DateTimeKind.Local).AddTicks(9094),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9096),
                             CreatedBy = "admin",
                             DepartureAirportId = 11,
-                            DepartureTime = new DateTime(2023, 11, 24, 15, 53, 27, 755, DateTimeKind.Local).AddTicks(505),
+                            DepartureTime = new DateTime(2023, 11, 24, 15, 21, 35, 708, DateTimeKind.Local).AddTicks(9090),
                             FlightNumber = "AA100",
                             InactivatedBy = "",
                             ModifiedBy = "",
@@ -589,11 +512,11 @@ namespace FlightManagement_API.Persistence.Migrations
                             AircraftId = 12,
                             AirlineId = 12,
                             ArrivalAirportId = 11,
-                            ArrivalTime = new DateTime(2023, 11, 25, 8, 53, 27, 755, DateTimeKind.Local).AddTicks(517),
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(519),
+                            ArrivalTime = new DateTime(2023, 11, 25, 8, 21, 35, 708, DateTimeKind.Local).AddTicks(9102),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9104),
                             CreatedBy = "admin",
                             DepartureAirportId = 12,
-                            DepartureTime = new DateTime(2023, 11, 25, 0, 53, 27, 755, DateTimeKind.Local).AddTicks(515),
+                            DepartureTime = new DateTime(2023, 11, 25, 0, 21, 35, 708, DateTimeKind.Local).AddTicks(9100),
                             FlightNumber = "LH205",
                             InactivatedBy = "",
                             ModifiedBy = "",
@@ -673,11 +596,11 @@ namespace FlightManagement_API.Persistence.Migrations
                             BaggageCarousel = "Carousel 5",
                             BoardingStatus = "On Time",
                             CheckInCounter = 22,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(547),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9143),
                             CreatedBy = "admin",
                             FlightDistance = 2500.0,
                             Gate = "G5",
-                            GateTime = new DateTime(2023, 11, 24, 15, 23, 27, 755, DateTimeKind.Local).AddTicks(544),
+                            GateTime = new DateTime(2023, 11, 24, 14, 51, 35, 708, DateTimeKind.Local).AddTicks(9139),
                             InactivatedBy = "",
                             ModifiedBy = "",
                             Stand = "Stand 3A",
@@ -691,11 +614,11 @@ namespace FlightManagement_API.Persistence.Migrations
                             BaggageCarousel = "Carousel 3",
                             BoardingStatus = "Delayed",
                             CheckInCounter = 18,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(553),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9204),
                             CreatedBy = "admin",
                             FlightDistance = 3200.0,
                             Gate = "G10",
-                            GateTime = new DateTime(2023, 11, 25, 0, 23, 27, 755, DateTimeKind.Local).AddTicks(551),
+                            GateTime = new DateTime(2023, 11, 24, 23, 51, 35, 708, DateTimeKind.Local).AddTicks(9201),
                             InactivatedBy = "",
                             ModifiedBy = "",
                             Stand = "Stand 4B",
@@ -762,7 +685,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(828),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9493),
                             CreatedBy = "admin",
                             Dimensions = "22x14x9 inches",
                             InactivatedBy = "",
@@ -776,7 +699,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 12,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(832),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9497),
                             CreatedBy = "admin",
                             Dimensions = "24x16x10 inches",
                             InactivatedBy = "",
@@ -847,7 +770,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(585),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9243),
                             CreatedBy = "admin",
                             Email = "johndoe@example.com",
                             FirstName = "John",
@@ -860,7 +783,7 @@ namespace FlightManagement_API.Persistence.Migrations
                         new
                         {
                             Id = 12,
-                            Created = new DateTime(2023, 11, 24, 12, 53, 27, 755, DateTimeKind.Local).AddTicks(590),
+                            Created = new DateTime(2023, 11, 24, 12, 21, 35, 708, DateTimeKind.Local).AddTicks(9248),
                             CreatedBy = "admin",
                             Email = "janesmith@example.com",
                             FirstName = "Jane",
@@ -878,17 +801,6 @@ namespace FlightManagement_API.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("AirlineId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Airline");
-                });
-
-            modelBuilder.Entity("FlightManagement_API.Domain.Entities.AirlineContact", b =>
-                {
-                    b.HasOne("FlightManagement_API.Domain.Entities.Airline", "Airline")
-                        .WithMany("Contacts")
-                        .HasForeignKey("AirlineId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Airline");
@@ -1118,11 +1030,6 @@ namespace FlightManagement_API.Persistence.Migrations
                     b.Navigation("Amenities");
 
                     b.Navigation("Flights");
-                });
-
-            modelBuilder.Entity("FlightManagement_API.Domain.Entities.Airline", b =>
-                {
-                    b.Navigation("Contacts");
                 });
 
             modelBuilder.Entity("FlightManagement_API.Domain.Entities.Airport", b =>

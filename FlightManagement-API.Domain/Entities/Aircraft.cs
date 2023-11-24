@@ -26,6 +26,10 @@ namespace FlightManagement_API.Domain.Entities
 
         public DateOnly LastMaintenanceDate { get; set; }
 
+        public int AirlineId { get; set; }
+
+        public Airline Airline { get; set; }
+
         public ICollection<Flight> Flights { get; set; }
 
         public ICollection<Amenity> Amenities { get; set; }
