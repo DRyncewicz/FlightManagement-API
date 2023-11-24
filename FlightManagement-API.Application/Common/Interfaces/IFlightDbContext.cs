@@ -18,6 +18,10 @@ namespace FlightManagement_API.Application.Common.Interfaces
 
         DbSet<Airport> Airports { get; set; }
 
+        DbSet<Domain.Entities.FlightPricing> FlightPricings { get; set; }
+
+        DbSet<SeatDetail> SeatDetails { get; set; }
+
         DbSet<Amenity> Amenities { get; set; }
 
         DbSet<Booking> Bookings { get; set; }

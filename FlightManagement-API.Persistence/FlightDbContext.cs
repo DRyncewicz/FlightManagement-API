@@ -14,6 +14,10 @@ namespace FlightManagement_API.Persistence
 
         public DbSet<Airline> Airlines { get; set; }
 
+        public DbSet<FlightPricing> FlightPricings { get; set; }
+
+        public DbSet<SeatDetail> SeatDetails { get; set; }
+
         public DbSet<AirlineContact> AirlineContacts { get; set; }
 
         public DbSet<Airport> Airports { get; set; }

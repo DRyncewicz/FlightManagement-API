@@ -16,7 +16,6 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
         {
             var flight = mapper.Map<Flight>(request);
             await flightDbContext.Flights.AddAsync(flight, cancellationToken);
-
             await flightDbContext.SaveChangesAsync(cancellationToken);
 
             return flight.Id;

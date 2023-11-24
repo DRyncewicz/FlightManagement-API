@@ -1,4 +1,5 @@
-﻿using FlightManagement_API.Application.Flights.Commands.CreateFlight;
+﻿using FlightManagement_API.Application.FlightPricing.Commands;
+using FlightManagement_API.Application.Flights.Commands.CreateFlight;
 using FlightManagement_API.Application.Flights.Commands.DeleteFlight;
 using FlightManagement_API.Application.Flights.Commands.UpdateFlight;
 using FlightManagement_API.Application.Flights.Queries.GetFlightInformation;
