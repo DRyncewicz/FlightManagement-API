@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlightManagement_API.Application.Common.Mappings;
 using MediatR;
 
 namespace FlightManagement_API.Application.Flights.Commands.CreateFlight

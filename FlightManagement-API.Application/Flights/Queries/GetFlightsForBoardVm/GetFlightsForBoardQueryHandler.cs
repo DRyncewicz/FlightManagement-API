@@ -18,7 +18,8 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightsForBoardVm
                 .Include(p => p.ArrivalAirport)
                 .Include(p => p.DepartureAirport)
                 .Where(f => f.DepartureTime > dateTime.Now)
-                .Skip(request.PageSize * (request.CurrentPage - 1)).Take(request.PageSize).ToListAsync(cancellationToken);
+                .Skip(request.PageSize * (request.CurrentPage - 1)).Take(request.PageSize)
+                .OrderBy(f => f.DepartureTime).ToListAsync(cancellationToken);
 
             var flightsDto = mapper.Map<List<FlightDto>>(flights);
             var flightForBoardVm = new FlightsForBoardVm()

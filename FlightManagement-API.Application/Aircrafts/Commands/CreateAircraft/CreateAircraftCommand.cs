@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FlightManagement_API.Application.Common.Mappings;
 using FlightManagement_API.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using MediatR;
 
-namespace FlightManagement_API.Application.Aircrafts.Queries.GetAircraftInformation
+namespace FlightManagement_API.Application.Aircrafts.Commands.CreateAircraft
 {
-    public class AircraftInformationVm :IMapFrom<Aircraft>
+    public class CreateAircraftCommand : IRequest<int>, IMapFrom<Aircraft>
     {
         public string Model { get; set; }
 
         public string Manufacturer { get; set; }
 
         public int SeatCapacity { get; set; }
-
-        public string Owner { get; set; }
 
         public int BusinessClassSeats { get; set; }
 
@@ -30,15 +28,11 @@ namespace FlightManagement_API.Application.Aircrafts.Queries.GetAircraftInformat
 
         public DateOnly LastMaintenanceDate { get; set; }
 
-        public List<string> Amenities { get; set; }    
-
-        public List<FlightsForListDto> Flights { get; set; }
+        public int AirlineId { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Aircraft, AircraftInformationVm>()
-                .ForMember(d => d.Amenities, map => map.MapFrom(src => src.Amenities.Select(a => a.Name)))
-                .ForMember(d => d.Owner, map => map.MapFrom(src => src.Airline.Name));
+            profile.CreateMap<Aircraft, CreateAircraftCommand>().ReverseMap();
         }
     }
 }

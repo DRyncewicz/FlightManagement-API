@@ -12,9 +12,12 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Airline>().HasData(
                 new Airline
                 {
-                    Id = 1,
+                    Id = 11,
                     Name = "American Airlines",
                     LogoUrl = "url_to_logo_american",
+                    CeoFirstName = "Janusz",
+                    CeoLastName = "Knot",
+                    SiteUrl = "https://www.aa.com",
                     Created = DateTime.Now,
                     CreatedBy = "admin",
                     Inactivated = null,
@@ -25,9 +28,12 @@ namespace FlightManagement_API.Persistence
                 },
                 new Airline
                 {
-                    Id = 2,
+                    Id = 12,
                     Name = "Lufthansa",
                     LogoUrl = "url_to_logo_lufthansa",
+                    CeoFirstName = "Helmuth",
+                    CeoLastName = "Riddle",
+                    SiteUrl = "https://www.lufthansa.com",
                     Created = DateTime.Now,
                     CreatedBy = "admin",
                     Inactivated = null,
@@ -43,7 +49,7 @@ namespace FlightManagement_API.Persistence
             {
                 p.HasData(new
                     {
-                        Id = 1,
+                        Id = 11,
                         Name = "Los Angeles International Airport",
                         IataCode = "LAX",
                         Created = DateTime.Now,
@@ -56,7 +62,7 @@ namespace FlightManagement_API.Persistence
                 },
                     new
                     {
-                        Id = 2,
+                        Id = 12,
                         Name = "Frankfurt Airport",
                         IataCode = "FRA",
                         Created = DateTime.Now,
@@ -70,7 +76,7 @@ namespace FlightManagement_API.Persistence
 
                 p.OwnsOne(a => a.Address).HasData(new
                     {
-                        AirportId = 1,
+                        AirportId = 11,
                         Street = "1 World Way",
                         City = "Los Angeles",
                         State = "CA",
@@ -79,7 +85,7 @@ namespace FlightManagement_API.Persistence
                     },
                     new
                     {
-                        AirportId = 2,
+                        AirportId = 12,
                         Street = "60547 Frankfurt",
                         City = "Frankfurt",
                         State = "Hesse",
@@ -91,10 +97,14 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Aircraft>().HasData(
                 new Aircraft
                 {
-                    Id = 1,
+                    Id = 11,
                     Manufacturer = "Boeing",
                     Model = "777",
                     SeatCapacity = 300,
+                    BusinessClassSeats = 100,
+                    EconomyClassSeats = 200,
+                    Range = 10820,
+                    AirlineId = 11,
                     Created = DateTime.Now,
                     CreatedBy = "admin",
                     Inactivated = null,
@@ -105,10 +115,14 @@ namespace FlightManagement_API.Persistence
                 },
                 new Aircraft
                 {
-                    Id = 2,
+                    Id = 12,
                     Manufacturer = "Airbus",
                     Model = "A380",
                     SeatCapacity = 500,
+                    BusinessClassSeats = 160,
+                    EconomyClassSeats = 340,
+                    Range = 15200,
+                    AirlineId = 11,
                     Created = DateTime.Now,
                     CreatedBy = "admin",
                     Inactivated = null,
@@ -122,11 +136,11 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Flight>().HasData(
                 new Flight
                 {
-                    Id = 1,
-                    AircraftId = 1,
-                    AirlineId = 1,
-                    DepartureAirportId = 1,
-                    ArrivalAirportId = 2,
+                    Id = 11,
+                    AircraftId = 11,
+                    AirlineId = 11,
+                    DepartureAirportId = 11,
+                    ArrivalAirportId = 12,
                     DepartureTime = DateTime.Now.AddHours(3),
                     ArrivalTime = DateTime.Now.AddHours(11),
                     FlightNumber = "AA100",
@@ -141,11 +155,11 @@ namespace FlightManagement_API.Persistence
                 },
                 new Flight
                 {
-                    Id = 2,
-                    AircraftId = 2,
-                    AirlineId = 2,
-                    DepartureAirportId = 2,
-                    ArrivalAirportId = 1,
+                    Id = 12,
+                    AircraftId = 12,
+                    AirlineId = 12,
+                    DepartureAirportId = 12,
+                    ArrivalAirportId = 11,
                     DepartureTime = DateTime.Now.AddHours(12),
                     ArrivalTime = DateTime.Now.AddHours(20),
                     FlightNumber = "LH205",
@@ -163,7 +177,7 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<FlightDetail>().HasData(
                 new FlightDetail
                 {
-                    Id = 1,
+                    Id = 11,
                     Aerobridge = true,
                     BaggageCarousel = "Carousel 5",
                     BoardingStatus = "On Time",
@@ -183,7 +197,7 @@ namespace FlightManagement_API.Persistence
                 },
                 new FlightDetail
                 {
-                    Id = 2,
+                    Id = 12,
                     Aerobridge = false,
                     BaggageCarousel = "Carousel 3",
                     BoardingStatus = "Delayed",
@@ -207,7 +221,7 @@ namespace FlightManagement_API.Persistence
             {
                 p.HasData(new
                     {
-                        Id = 1,
+                        Id = 11,
                         FirstName = "John",
                         LastName = "Doe",
                         Email = "johndoe@example.com",
@@ -222,7 +236,7 @@ namespace FlightManagement_API.Persistence
                     },
                     new
                     {
-                        Id = 2,
+                        Id = 12,
                         FirstName = "Jane",
                         LastName = "Smith",
                         Email = "janesmith@example.com",
@@ -238,7 +252,7 @@ namespace FlightManagement_API.Persistence
 
                 p.OwnsOne(a => a.Address).HasData(new
                     {
-                        PassengerId = 1,
+                        PassengerId = 11,
                         Street = "123 Broadway",
                         City = "New York",
                         State = "NY",
@@ -247,7 +261,7 @@ namespace FlightManagement_API.Persistence
                     },
                     new
                     {
-                        PassengerId = 2,
+                        PassengerId = 12,
                         Street = "Alexanderplatz 1",
                         City = "Berlin",
                         State = "Berlin",
@@ -259,9 +273,9 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Booking>().HasData(
                 new Booking
                 {
-                    Id = 1,
-                    FlightId = 1,
-                    PassengerId = 1,
+                    Id = 11,
+                    FlightId = 11,
+                    PassengerId = 11,
                     Price = 500.00,
                     ReservationDate = DateTime.Now,
                     Status = "Confirmed",
@@ -275,9 +289,9 @@ namespace FlightManagement_API.Persistence
                 },
                 new Booking
                 {
-                    Id = 2,
-                    FlightId = 2,
-                    PassengerId = 2,
+                    Id = 12,
+                    FlightId = 12,
+                    PassengerId = 12,
                     Price = 750.00,
                     ReservationDate = DateTime.Now,
                     Status = "Confirmed",
@@ -294,8 +308,8 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Amenity>().HasData(
                 new Amenity
                 {
-                    Id = 1,
-                    AircraftId = 1,
+                    Id = 11,
+                    AircraftId = 11,
                     Name = "Wi-Fi",
                     Created = DateTime.Now,
                     CreatedBy = "admin",
@@ -307,8 +321,8 @@ namespace FlightManagement_API.Persistence
                 },
                 new Amenity
                 {
-                    Id = 2,
-                    AircraftId = 1,
+                    Id = 12,
+                    AircraftId = 11,
                     Name = "Extra Legroom",
                     Created = DateTime.Now,
                     CreatedBy = "admin",
@@ -323,8 +337,8 @@ namespace FlightManagement_API.Persistence
             modelBuilder.Entity<Luggage>().HasData(
                 new Luggage
                 {
-                    Id = 1,
-                    PassengerId = 1,
+                    Id = 11,
+                    PassengerId = 11,
                     Dimensions = "22x14x9 inches",
                     Weight = 15.5,
                     Type = "Carry-on",
@@ -339,8 +353,8 @@ namespace FlightManagement_API.Persistence
                 },
                 new Luggage
                 {
-                    Id = 2,
-                    PassengerId = 2,
+                    Id = 12,
+                    PassengerId = 12,
                     Dimensions = "24x16x10 inches",
                     Weight = 20.0,
                     Type = "Checked",

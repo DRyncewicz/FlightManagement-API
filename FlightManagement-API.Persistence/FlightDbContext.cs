@@ -14,6 +14,8 @@ namespace FlightManagement_API.Persistence
 
         public DbSet<Airline> Airlines { get; set; }
 
+        public DbSet<AirlineContact> AirlineContacts { get; set; }
+
         public DbSet<Airport> Airports { get; set; }
 
         public DbSet<Amenity> Amenities { get; set; }
@@ -61,6 +63,12 @@ namespace FlightManagement_API.Persistence
                 .WithOne(f => f.ArrivalAirport)
                 .HasForeignKey(f => f.ArrivalAirportId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Aircraft>()
+                .HasOne(a => a.Airline)
+                .WithMany()
+                .HasForeignKey(a => a.AirlineId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.SeedData();
         }

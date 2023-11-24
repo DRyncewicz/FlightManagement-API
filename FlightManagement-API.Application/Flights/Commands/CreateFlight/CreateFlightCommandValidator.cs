@@ -20,7 +20,8 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
             RuleFor(flight => flight.DepartureTime)
                 .GreaterThan(dateTime.Now).WithMessage("Flight date must be in the future.");
 
-            RuleFor(flight => flight.FlightDistance).GreaterThan(150);
+            RuleFor(flight => flight.FlightDistance)
+                .GreaterThan(150);
 
             RuleFor(flight => flight.GateTime)
                 .GreaterThan(dateTime.Now).WithMessage("Gate date must be in the future.");
