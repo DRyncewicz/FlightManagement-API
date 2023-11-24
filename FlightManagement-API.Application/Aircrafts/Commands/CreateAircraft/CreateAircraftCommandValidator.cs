@@ -18,6 +18,9 @@ namespace FlightManagement_API.Application.Aircrafts.Commands.CreateAircraft
             RuleFor(a => a.SeatCapacity).Must((model, seatCapacity) =>
                 seatCapacity == (model.BusinessClassSeats + model.EconomyClassSeats))
                 .WithMessage("Sum of all seats must be equal to seat capacity");
+            RuleFor(a => a.SeatColumns).Must((model, seatColumns) =>
+                seatColumns % model.SeatCapacity == 0)
+                .WithMessage("The number of seat columns must be regular and divisible by the number of seats");
             RuleFor(a => a.YearOfManufacture).NotEmpty();
             RuleFor(a => a.LastMaintenanceDate).Must(lastDate => DateOnly.FromDateTime(DateTime.Now.AddYears(-1)) < lastDate)
                 .WithMessage("Last inspection for newly registered aircrafts must not be more than 3 months ago");

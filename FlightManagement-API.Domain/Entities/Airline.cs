@@ -22,8 +22,6 @@ namespace FlightManagement_API.Domain.Entities
 
         public ICollection<AirlineContact> Contacts { get; set; }
 
-        ICollection<Flight> Flights { get; set; }
-
         ICollection<Aircraft> Aircrafts { get; set; }
     }
 }

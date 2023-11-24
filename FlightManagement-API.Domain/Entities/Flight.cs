@@ -23,18 +23,17 @@ namespace FlightManagement_API.Domain.Entities
 
         public DateTime ArrivalTime { get; set; }
 
-        public int AirlineId { get; set; }
-
-        public Airline Airline { get; set; }
-
         public int AircraftId { get; set; }
 
         public Aircraft Aircraft { get; set; }
 
         public string Status { get; set; }
 
-        public FlightDetail FlightDetail{ get; set; }
+        public FlightDetail FlightDetail{ get; set; } 
 
         public ICollection<Booking> Bookings { get; set; }
+
+        public  FlightPricing FlightPricing { get; set; }
+
     }
 }

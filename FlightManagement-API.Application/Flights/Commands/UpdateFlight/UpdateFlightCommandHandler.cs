@@ -28,7 +28,6 @@ namespace FlightManagement_API.Application.Flights.Commands.UpdateFlight
             patchHelper.MapIfNotNull(request.ArrivalAirportId, value => flight.ArrivalAirportId = value.GetValueOrDefault());
             patchHelper.MapIfNotNull(request.DepartureTime, value => flight.DepartureTime = value.GetValueOrDefault());
             patchHelper.MapIfNotNull(request.ArrivalTime, value => flight.ArrivalTime = value.GetValueOrDefault());
-            patchHelper.MapIfNotNull(request.AirlineId, value => flight.AirlineId = value.GetValueOrDefault());
             patchHelper.MapIfNotNull(request.AircraftId, value => flight.AircraftId = value.GetValueOrDefault());
             patchHelper.MapIfNotNull(request.Status, value => flight.Status = value);
 

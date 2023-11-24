@@ -103,6 +103,7 @@ namespace FlightManagement_API.Persistence
                     SeatCapacity = 300,
                     BusinessClassSeats = 100,
                     EconomyClassSeats = 200,
+                    SeatColumns = 6,
                     Range = 10820,
                     AirlineId = 11,
                     Created = DateTime.Now,
@@ -121,6 +122,7 @@ namespace FlightManagement_API.Persistence
                     SeatCapacity = 500,
                     BusinessClassSeats = 160,
                     EconomyClassSeats = 340,
+                    SeatColumns = 10,
                     Range = 15200,
                     AirlineId = 11,
                     Created = DateTime.Now,
@@ -138,7 +140,6 @@ namespace FlightManagement_API.Persistence
                 {
                     Id = 11,
                     AircraftId = 11,
-                    AirlineId = 11,
                     DepartureAirportId = 11,
                     ArrivalAirportId = 12,
                     DepartureTime = DateTime.Now.AddHours(3),
@@ -157,7 +158,6 @@ namespace FlightManagement_API.Persistence
                 {
                     Id = 12,
                     AircraftId = 12,
-                    AirlineId = 12,
                     DepartureAirportId = 12,
                     ArrivalAirportId = 11,
                     DepartureTime = DateTime.Now.AddHours(12),
