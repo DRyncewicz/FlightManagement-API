@@ -2,6 +2,7 @@
 using FlightManagement_API.Application.Flights.Commands.DeleteFlight;
 using FlightManagement_API.Application.Flights.Commands.UpdateFlight;
 using FlightManagement_API.Application.Flights.Queries.GetFlightInformation;
+using FlightManagement_API.Application.Flights.Queries.GetFlightsForBoardVm;
 using FlightManagement_API.Domain.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +21,16 @@ namespace FlightManagement_API.Controllers
         public async Task<ActionResult<FlightInformationVm>> GetDetails(int id)
         {
             var vm = await Mediator.Send(new GetFlightInformationQuery() { FlightId = id });
+            return vm;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<FlightsForBoardVm>> GetFlightsForBoard([FromQuery] int pageSize = 15, [FromQuery] int page = 1)
+        {
+            var vm = await Mediator.Send(new GetFlightsForBoardQuery() {PageSize = pageSize, CurrentPage = page});
             return vm;
         }
 

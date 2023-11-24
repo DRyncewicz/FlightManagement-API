@@ -8,6 +8,10 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightsForBoardVm
 {
     public class FlightsForBoardVm
     {
-        ICollection<FlightDto> Flights { get; set; }
+        public List<FlightDto> Flights { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PageSize { get; set; }
     }
 }
