@@ -17,6 +17,10 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightInformation
         {
             var flight = await flightDbContext.Flights.Where(p => p.Id == request.FlightId)
                 .Include(p => p.FlightDetail)
+                .Include(p => p.DepartureAirport)
+                .Include(p => p.ArrivalAirport)
+                .Include(p => p.Airline)
+                .Include(p => p.Aircraft)
                 .FirstOrDefaultAsync(cancellationToken);
             var flightInformationVm = mapper.Map<FlightInformationVm>(flight);
 

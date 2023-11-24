@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoMapper;
 using FlightManagement_API.Application.Common.Mappings;
@@ -25,7 +26,7 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightInformation
 
         public string AirlineLogo { get; set; }
 
-        public int AircraftId { get; set; }
+        public string AircraftInfo { get; set; }
 
         public string status { get; set; }
 
@@ -46,7 +47,12 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightInformation
                 .ForMember(d => d.GateTime, map => map.MapFrom(src => src.FlightDetail.GateTime))
                 .ForMember(d => d.Terminal, map => map.MapFrom(src => src.FlightDetail.Terminal))
                 .ForMember(d => d.Stand, map => map.MapFrom(src => src.FlightDetail.Stand))
-                .ForMember(d => d.Aerobridge, map => map.MapFrom(src => src.FlightDetail.Aerobridge));
+                .ForMember(d => d.Aerobridge, map => map.MapFrom(src => src.FlightDetail.Aerobridge))
+                .ForMember(d => d.DepartureIataCode, map => map.MapFrom(src => src.DepartureAirport.IataCode))
+                .ForMember(d => d.ArrivalIataCode, map => map.MapFrom(src => src.ArrivalAirport.IataCode))
+                .ForMember(d => d.AirlineName, map => map.MapFrom(src => src.Airline.Name))
+                .ForMember(d => d.AirlineLogo, map => map.MapFrom(src => src.Airline.LogoUrl))
+                .ForMember(d => d.AircraftInfo, map => map.MapFrom(src => src.Aircraft.Manufacturer + " " + src.Aircraft.Model));
         }
     }
 }

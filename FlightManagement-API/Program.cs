@@ -1,5 +1,6 @@
 
 using FlightManagement_API.Application;
+using FlightManagement_API.Converters;
 using FlightManagement_API.Infrastructure;
 using FlightManagement_API.Persistence;
 using HealthChecks.UI.Client;
@@ -21,10 +22,13 @@ namespace FlightManagement_API
                 options.UseSqlServer(connectionString));
 
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            builder.Host.UseSerilog((hostContext, services, configuration) =>
+            {
+                configuration.ReadFrom.Configuration(hostContext.Configuration);
+            });
+
             try
             {
-                builder.Host.UseSerilog();
                 Log.Information("Application is starting up");
             }
             catch (Exception ex)
@@ -39,7 +43,11 @@ namespace FlightManagement_API
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new CustomDateTimeConverter("yyyy-MM-dd HH:mm:ss"));
+            });
+
             builder.Services.AddCors(options =>
             options.AddPolicy(name: "MyAllowSpecificOrigins",
             builder =>
