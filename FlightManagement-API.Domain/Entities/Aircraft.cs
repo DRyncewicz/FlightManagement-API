@@ -20,6 +20,8 @@ namespace FlightManagement_API.Domain.Entities
 
         public int EconomyClassSeats { get; set; }
 
+        public int SeatColumns { get; set; }
+
         public double Range { get; set; }
 
         public DateOnly YearOfManufacture { get; set; }

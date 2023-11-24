@@ -22,6 +22,8 @@ namespace FlightManagement_API.Application.Aircrafts.Commands.CreateAircraft
 
         public int EconomyClassSeats { get; set; }
 
+        public int SeatColumns { get; set; }
+
         public double Range { get; set; }
 
         public DateOnly YearOfManufacture { get; set; }

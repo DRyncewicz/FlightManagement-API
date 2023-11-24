@@ -19,8 +19,8 @@ namespace FlightManagement_API.Application.Flights.Queries.GetFlightInformation
                 .Include(p => p.FlightDetail)
                 .Include(p => p.DepartureAirport)
                 .Include(p => p.ArrivalAirport)
-                .Include(p => p.Airline)
                 .Include(p => p.Aircraft)
+                .ThenInclude(p => p.Airline)
                 .FirstOrDefaultAsync(cancellationToken);
             var flightInformationVm = mapper.Map<FlightInformationVm>(flight);
 
