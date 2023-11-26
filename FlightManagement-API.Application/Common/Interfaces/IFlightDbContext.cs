@@ -24,7 +24,7 @@ namespace FlightManagement_API.Application.Common.Interfaces
 
         DbSet<Amenity> Amenities { get; set; }
 
-        DbSet<Booking> Bookings { get; set; }
+        DbSet<Domain.Entities.Booking> Bookings { get; set; }
 
         DbSet<Flight> Flights { get; set; }
 
