@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FlightManagement_API.Application.Common.Interfaces;
+using FlightManagement_API.Application.Common.Interfaces.Database;
 using FlightManagement_API.Domain.Entities;
 using MediatR;
 

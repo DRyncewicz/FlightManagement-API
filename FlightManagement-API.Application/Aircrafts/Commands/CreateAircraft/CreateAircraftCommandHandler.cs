@@ -1,5 +1,4 @@
-﻿using FlightManagement_API.Application.Common.Interfaces;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FlightManagement_API.Domain.Entities;
 using AutoMapper;
+using FlightManagement_API.Application.Common.Interfaces.Database;
 
 namespace FlightManagement_API.Application.Aircrafts.Commands.CreateAircraft
 {

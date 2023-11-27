@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FlightManagement_API.Application.Common.Interfaces;
+using FlightManagement_API.Application.Common.Interfaces.Times;
 using FluentValidation;
 
 namespace FlightManagement_API.Application.Aircrafts.Commands.CreateAircraft

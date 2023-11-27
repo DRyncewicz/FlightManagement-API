@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FlightManagement_API.Application.Common.Interfaces;
+using FlightManagement_API.Application.Common.Interfaces.Database;
+using FlightManagement_API.Application.Common.Interfaces.Documents;
+using FlightManagement_API.Application.Common.Interfaces.Files;
+using FlightManagement_API.Application.DomainEvent.Event;
 using FlightManagement_API.Domain.Entities;
 using MediatR;
 
 namespace FlightManagement_API.Application.Booking.Commands
 {
-    public class CreateBookingCommandHandler(IFlightDbContext flightDbContext, IMapper mapper) : IRequestHandler<CreateBookingCommand, int>
+    public class CreateBookingCommandHandler(IFlightDbContext flightDbContext, IMapper mapper, IMediator mediator) : IRequestHandler<CreateBookingCommand, int>
     {
         public async Task<int> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
@@ -29,10 +32,11 @@ namespace FlightManagement_API.Application.Booking.Commands
                 luggage.PassengerId = request.PassengerId.Value;
             }
 
-
             await flightDbContext.Bookings.AddAsync(booking, cancellationToken);
             await flightDbContext.Luggages.AddAsync(luggage, cancellationToken);
             await flightDbContext.SaveChangesAsync(cancellationToken);
+            await mediator.Publish(new BookingCreatedEvent(booking.Flight, booking.Passenger), cancellationToken);
+
             return booking.Id;
         }
     }

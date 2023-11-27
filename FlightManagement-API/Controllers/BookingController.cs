@@ -1,12 +1,15 @@
 ﻿using FlightManagement_API.Application.Airline.Commands.CreateAirline;
 using FlightManagement_API.Application.Booking.Commands;
+using FlightManagement_API.Application.DomainEvent.Event;
+using FlightManagement_API.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace FlightManagement_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/bookings")]
     [ApiController]
     public class BookingController : BaseController
     {

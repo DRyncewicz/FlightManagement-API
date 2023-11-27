@@ -41,6 +41,8 @@ namespace FlightManagement_API.Application.Booking.Commands
 
         public double Weight { get; set; }
 
+        public int SeatId { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<CreateBookingCommand, Domain.Entities.Booking>()

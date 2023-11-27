@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
-using FlightManagement_API.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using FlightManagement_API.Domain.Common;
 using FlightManagement_API.Domain.Entities;
+using FlightManagement_API.Application.Common.Interfaces.Database;
+using FlightManagement_API.Application.Common.Interfaces.Times;
 
 namespace FlightManagement_API.Persistence
 {

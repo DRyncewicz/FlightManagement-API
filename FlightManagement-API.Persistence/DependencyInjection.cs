@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using FlightManagement_API.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
+using FlightManagement_API.Application.Common.Interfaces.Database;
 
 namespace FlightManagement_API.Persistence
 {
