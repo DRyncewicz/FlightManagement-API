@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FlightManagement_API.Application.Common.Interfaces;
+using FlightManagement_API.Application.Common.Interfaces.Database;
 using FlightManagement_API.Domain.Entities;
 using MediatR;
 
@@ -16,7 +16,6 @@ namespace FlightManagement_API.Application.Flights.Commands.CreateFlight
         {
             var flight = mapper.Map<Flight>(request);
             await flightDbContext.Flights.AddAsync(flight, cancellationToken);
-
             await flightDbContext.SaveChangesAsync(cancellationToken);
 
             return flight.Id;

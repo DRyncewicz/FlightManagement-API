@@ -23,6 +23,6 @@ namespace FlightManagement_API.Domain.Entities
 
         public Flight Flight { get; set; }
 
-        public ICollection<SeatDetail> SeatDetails { get; set; }
+        public ICollection<SeatDetail> SeatDetails { get; set; } = new List<SeatDetail>();
     }
 }

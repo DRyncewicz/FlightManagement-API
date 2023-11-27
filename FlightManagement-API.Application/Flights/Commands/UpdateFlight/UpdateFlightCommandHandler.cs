@@ -1,5 +1,4 @@
 ﻿using FlightManagement_API.Application.Common.Exceptions;
-using FlightManagement_API.Application.Common.Interfaces;
 using FlightManagement_API.Application.Flights.Commands.DeleteFlight;
 using FlightManagement_API.Domain.Entities;
 using MediatR;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlightManagement_API.Application.Helpers;
+using FlightManagement_API.Application.Common.Interfaces.Database;
 
 namespace FlightManagement_API.Application.Flights.Commands.UpdateFlight
 {

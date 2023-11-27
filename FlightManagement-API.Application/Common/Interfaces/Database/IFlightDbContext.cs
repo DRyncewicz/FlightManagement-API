@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlightManagement_API.Application.Common.Interfaces
+namespace FlightManagement_API.Application.Common.Interfaces.Database
 {
     public interface IFlightDbContext
     {
@@ -14,13 +14,17 @@ namespace FlightManagement_API.Application.Common.Interfaces
 
         DbSet<Domain.Entities.Airline> Airlines { get; set; }
 
-        DbSet<AirlineContact> AirlineContacts { get; set; } 
+        DbSet<AirlineContact> AirlineContacts { get; set; }
 
         DbSet<Airport> Airports { get; set; }
 
+        DbSet<Domain.Entities.FlightPricing> FlightPricings { get; set; }
+
+        DbSet<SeatDetail> SeatDetails { get; set; }
+
         DbSet<Amenity> Amenities { get; set; }
 
-        DbSet<Booking> Bookings { get; set; }
+        DbSet<Domain.Entities.Booking> Bookings { get; set; }
 
         DbSet<Flight> Flights { get; set; }
 
