@@ -48,31 +48,35 @@ namespace FlightManagement_API.Infrastructure.DocumentsCreator.Tickets
             return this;
         }
 
-        public IAirlineTicketBuilder AddFlightDetails(string details)
+        public IAirlineTicketBuilder AddFlightDetails(Flight flight)
         {
             var tableData = new TableData();
-            tableData.AddHeader("Data lotu", "Czas", "Numer lotu", "Brama");
-            //tableData.AddRow(details.Date, details.Time, details.FlightNumber, details.Gate);
-            tableData.AddRow("11:11", "a","b","c");
+            tableData.AddHeader("Flight date", "Flight time", "Flight number", "Gate");
+            tableData.AddRow(
+                flight.DepartureTime.Date.ToString(),
+                flight.DepartureTime.TimeOfDay.ToString(),
+                flight.FlightNumber,
+                flight.FlightDetail.Gate
+                );
+
             PdfPTable pdfTable = ConvertToPdfPTable(tableData);
             document.Add(pdfTable);
 
             return this;
         }
 
-        public IAirlineTicketBuilder AddPassengerDetails(string passenger)
+        public IAirlineTicketBuilder AddPassengerDetails(string passengerFullName, string bookingNumber)
         {
             var tableData = new TableData();
-            tableData.AddHeader("Imię i Nazwisko", "Numer Rezerwacji");
-            //tableData.AddRow(passenger.FullName, passenger.BookingNumber);
-            tableData.AddRow("Dominik", "Ryncewicz");
+            tableData.AddHeader("Passenger Name", "Booking number");
+            tableData.AddRow(passengerFullName, bookingNumber);
             PdfPTable pdfTable = ConvertToPdfPTable(tableData);
             document.Add(pdfTable);
 
             return this;
         }
 
-        public IAirlineTicketBuilder AddQRCode(string qrCodeData)
+        public IAirlineTicketBuilder AddQrCode(string qrCodeData)
         {
 
             BarcodeQRCode qrCode = new BarcodeQRCode(qrCodeData, 100, 100, null);
@@ -81,9 +85,9 @@ namespace FlightManagement_API.Infrastructure.DocumentsCreator.Tickets
             return this;
         }
 
-        public IAirlineTicketBuilder AddTermsAndConditions()
+        public IAirlineTicketBuilder AddTermsAndConditions(string terms)
         {
-
+            document.Add(new Paragraph(terms));
             return this;
         }
 

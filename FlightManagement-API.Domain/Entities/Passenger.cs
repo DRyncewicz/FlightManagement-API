@@ -21,5 +21,7 @@ namespace FlightManagement_API.Domain.Entities
         public Address Address { get; set; }
 
         public ICollection<Luggage> Luggages { get; set; }
+
+        public ICollection<Booking> Bookings { get; set; }
     }
 }

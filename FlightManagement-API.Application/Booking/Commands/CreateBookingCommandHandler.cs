@@ -35,7 +35,7 @@ namespace FlightManagement_API.Application.Booking.Commands
             await flightDbContext.Bookings.AddAsync(booking, cancellationToken);
             await flightDbContext.Luggages.AddAsync(luggage, cancellationToken);
             await flightDbContext.SaveChangesAsync(cancellationToken);
-            await mediator.Publish(new BookingCreatedEvent(booking.Flight, booking.Passenger), cancellationToken);
+            await mediator.Publish(new BookingCreatedEvent(booking.Id), cancellationToken);
 
             return booking.Id;
         }

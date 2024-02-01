@@ -12,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using FlightManagement_API.Application.Common.Interfaces.Documents;
 using FlightManagement_API.Application.Common.Interfaces.Files;
 using FlightManagement_API.Application.Common.Interfaces.Times;
+using FlightManagement_API.Application.Common.Interfaces.Emails;
+using FlightManagement_API.Infrastructure.Emails;
+using System.Net;
 
 namespace FlightManagement_API.Infrastructure
 {
@@ -25,6 +28,14 @@ namespace FlightManagement_API.Infrastructure
             services.AddTransient<IFileWrapper, FileWrapper>();
             services.AddTransient<IAirlineTicketBuilder, AirlineTicketPDFBuilder>();
             services.AddTransient<ITableData, TableData>();
+            var emailSettings = configuration.GetSection("EmailSettings");
+            services.AddSingleton<IEmailSender>(new EmailSender(
+                emailSettings["Host"],
+                int.Parse(emailSettings["Port"]),
+                bool.Parse(emailSettings["EnableSSL"]),
+                new NetworkCredential(emailSettings["UserName"], 
+                emailSettings["Password"])
+            ));
             return services;
         }
     }
