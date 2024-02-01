@@ -10,14 +10,11 @@ namespace FlightManagement_API.Application.DomainEvent.Event
 {
     public class BookingCreatedEvent : INotification
     {
-        public Flight Flight { get; }
+        public int BookingId { get; }
 
-        public Passenger Passenger { get; }
-
-        public BookingCreatedEvent(Flight flight, Passenger passenger)
+        public BookingCreatedEvent(int bookingId)
         {
-            Flight = flight;
-            Passenger = passenger;
+            BookingId = bookingId;
         }
     }
 }
